@@ -1,0 +1,25 @@
+# DOM FAQ routing definition
+dom_faq.paragraph.add:
+  path: '/admin/config/dom-faq/add/{type}'
+  defaults:
+    _entity_form: 'paragraph.default'
+    _title: 'Add FAQ'
+    type: 'faq'
+  requirements:
+    _permission: 'administer dom faq items'
+    _entity_create_access: 'paragraph:{type}'
+dom_faq.paragraph.edit:
+  path: '/admin/config/dom-faq/edit/{paragraph}'
+  defaults:
+    _entity_form: 'paragraph.edit'
+    _title: 'Edit FAQ'
+  requirements:
+    _permission: 'administer dom faq items'
+dom_faq.paragraph.delete:
+  path: '/admin/config/dom-faq/delete/{paragraph}'
+  defaults:
+    _entity_form: 'paragraph.delete'
+    _title: 'Delete FAQ'
+  requirements:
+    _permission: 'administer dom faq items'
+
