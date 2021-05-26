@@ -1,0 +1,8 @@
+name: 'DOM FAQ'
+type: module
+description: 'Provides FAQ paragraphs with categories for REST.'
+core: 8.x
+package: 'DOM'
+dependencies:
+  - paragraphs
+  - rest

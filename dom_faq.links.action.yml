@@ -1,0 +1,7 @@
+dom_faq.paragraph.item_add:
+  route_name: 'dom_faq.paragraph.add'
+  route_parameters:
+    type: faq
+  title: 'Add FAQ'
+  appears_on:
+    - view.dom_faq.admin_list
