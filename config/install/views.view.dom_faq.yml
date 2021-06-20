@@ -219,7 +219,7 @@ display:
             alter_text: true
             text: Edit
             make_link: true
-            path: '/admin/config/dom-faq/edit/{{ id }}'
+            path: '/admin/config/dom-paragraphs/edit/{{ id }}'
             absolute: false
             external: false
             replace_spaces: false
@@ -268,7 +268,7 @@ display:
             alter_text: true
             text: Delete
             make_link: true
-            path: '/admin/config/dom-faq/delete/{{ id }}?destination=/admin/config/dom-faq'
+            path: '/admin/config/dom-paragraphs/delete/{{ id }}?destination=/admin/config/dom-paragraphs/faq'
             absolute: false
             external: false
             replace_spaces: false
@@ -385,32 +385,6 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url.query_args
-        - user.permissions
-      tags:
-        - 'config:field.storage.paragraph.field_question'
-  admin_list:
-    display_plugin: page
-    id: admin_list
-    display_title: Page
-    position: 1
-    display_options:
-      display_extenders: {  }
-      path: admin/config/dom-faq
-      menu:
-        type: normal
-        title: 'Manage FAQ'
-        description: ''
-        expanded: false
-        parent: system.admin_config
-        weight: 0
-        context: '0'
-        menu_name: admin
     cache_metadata:
       max-age: -1
       contexts:

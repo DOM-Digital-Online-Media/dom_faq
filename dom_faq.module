@@ -1,46 +1,15 @@
 <?php
+
 /**
  * @file
  * Contains dom_faq.module.
  */
 
-use Drupal\Core\Access\AccessResult;
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Session\AccountInterface;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function dom_faq_form_taxonomy_term_faq_category_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function dom_faq_form_taxonomy_term_faq_category_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['relations']['#access'] = FALSE;
-}
-
-/**
- * Implements hook_entity_access().
- */
-function dom_faq_entity_access(EntityInterface $entity, $operation, AccountInterface $account) {
-  $is_item = ($entity->getEntityTypeId() === 'paragraph')
-    && ($entity->bundle() === 'faq');
-  $is_term = ($entity->getEntityTypeId() === 'taxonomy_term')
-    && ($entity->bundle() === 'faq_category');
-  $is_dict = ($entity->getEntityTypeId() === 'taxonomy_vocabulary')
-    && ($entity->id() === 'faq_category') && ($operation != 'delete');
-
-  if ($is_item || $is_term || $is_dict) {
-    return AccessResult::allowedIfHasPermission($account, 'administer dom faq items');
-  }
-}
-
-/**
- * Implements hook_entity_create_access().
- */
-function dom_faq_entity_create_access(AccountInterface $account, array $context, $entity_bundle) {
-  $is_item = ($context['entity_type_id'] === 'paragraph')
-    && ($entity_bundle === 'faq');
-  $is_term = ($context['entity_type_id'] === 'taxonomy_term')
-    && ($entity_bundle === 'faq_category');
-
-  if ($is_item || $is_term) {
-    return AccessResult::allowedIfHasPermission($account, 'administer dom faq items');
-  }
 }
