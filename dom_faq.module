@@ -5,11 +5,41 @@
  * Contains dom_faq.module.
  */
 
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Cache\CacheableMetadata;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\rest\Plugin\views\display\RestExport;
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function dom_faq_form_taxonomy_term_faq_category_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   $form['relations']['#access'] = FALSE;
+}
+
+/**
+ * Implements hook_dom_static_content_data_alter().
+ *
+ * Include FAQ info into static content response data.
+ */
+function dom_faq_dom_static_content_data_alter(&$data, CacheableMetadata $cache, $language = NULL) {
+  $language_manager = \Drupal::languageManager();
+  if ($language && ($lang = $language_manager->getLanguage($language))) {
+
+    // Temporarily alter the language manager.
+    $original_language = $language_manager->getConfigOverrideLanguage();
+    $language_manager->setConfigOverrideLanguage($lang);
+  }
+
+  // Get results for required language.
+  $response = RestExport::buildResponse('dom_faq', 'rest');
+  $cache->addCacheableDependency($response->getCacheableMetadata());
+
+  // Return original language if necessary.
+  if (isset($original_language)) {
+    $language_manager->setConfigOverrideLanguage($original_language);
+  }
+
+  $response_data = Json::decode($response->getContent());
+  $data['faq'] = $response_data;
 }
