@@ -7,3 +7,4 @@ package: "DOM"
 dependencies:
   - dom_paragraphs_extra
   - rest
+  - site_settings
