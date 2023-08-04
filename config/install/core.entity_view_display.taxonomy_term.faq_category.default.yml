@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.faq_category
+  module:
+    - text
+id: taxonomy_term.faq_category.default
+targetEntityType: taxonomy_term
+bundle: faq_category
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true
